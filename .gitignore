@@ -1,0 +1,14 @@
+# Arquivos de cache do Python
+__pycache__/
+*.pyc
+
+# Arquivos de modelo e outros artefatos
+*.joblib
+
+# Ambientes virtuais
+venv/
+.venv/
+env/
+
+# Arquivos específicos do sistema operacional
+.DS_Store
