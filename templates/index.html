@@ -1,67 +1,112 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Previsão de Valor de Imóveis - Califórnia</title>
-    <style>
-        body { font-family: sans-serif; background-color: #f4f4f9; margin: 0; padding: 20px; }
-        .container { max-width: 600px; margin: auto; background: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
-        h1, h2 { text-align: center; color: #333; }
-        form { display: flex; flex-direction: column; gap: 15px; }
-        .form-group { display: flex; flex-direction: column; }
-        label { margin-bottom: 5px; color: #555; font-weight: bold; }
-        input { padding: 10px; border: 1px solid #ccc; border-radius: 4px; }
-        button { padding: 12px; background-color: #007bff; color: white; border: none; border-radius: 4px; cursor: pointer; font-size: 16px; }
-        button:hover { background-color: #0056b3; }
-        .result { margin-top: 20px; padding: 15px; background-color: #e9f7ef; border: 1px solid #d1e7dd; border-radius: 4px; text-align: center; font-size: 18px; }
-    </style>
+    <title>Estimar Valor de Imóvel - Califórnia</title>
+    <!-- Adicionando o Tailwind CSS via CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
-    <div class="container">
-        <h1>Previsão de Valor de Imóveis na Califórnia</h1>
-        <form action="/predict" method="post">
-            <div class="form-group">
-                <label for="MedInc">Renda Média (MedInc):</label>
-                <input type="number" step="any" name="MedInc" required value="8.3252">
+<body class="bg-gray-900 text-gray-200 flex items-center justify-center min-h-screen">
+
+    <div class="w-full max-w-4xl p-8 space-y-8 bg-gray-800 rounded-xl shadow-lg">
+        
+        <div class="text-center">
+            <h1 class="text-4xl font-bold text-white">Estimar Valor de Imóvel na Califórnia</h1>
+            <p class="text-gray-400 mt-2">Preencha os campos abaixo para obter uma previsão com nosso modelo de Machine Learning.</p>
+        </div>
+
+        <form action="/modelofiap/predict" method="post" class="space-y-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                
+                <!-- Coluna Esquerda -->
+                <div class="space-y-4">
+                    <div>
+                        <label for="MedInc" class="block text-sm font-medium text-gray-300 mb-1">Renda Média (x$10k)</label>
+                        <input type="number" step="any" name="MedInc" required value="8.3252" class="w-full p-3 bg-gray-700 text-white rounded-lg border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    </div>
+                    <div>
+                        <label for="HouseAge" class="block text-sm font-medium text-gray-300 mb-1">Idade Média da Casa</label>
+                        <input type="number" step="any" name="HouseAge" required value="41.0" class="w-full p-3 bg-gray-700 text-white rounded-lg border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    </div>
+                    <div>
+                        <label for="AveRooms" class="block text-sm font-medium text-gray-300 mb-1">Média de Quartos</label>
+                        <input type="number" step="any" name="AveRooms" required value="6.9841" class="w-full p-3 bg-gray-700 text-white rounded-lg border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    </div>
+                    <div>
+                        <label for="AveBedrms" class="block text-sm font-medium text-gray-300 mb-1">Média de Dormitórios</label>
+                        <input type="number" step="any" name="AveBedrms" required value="1.0238" class="w-full p-3 bg-gray-700 text-white rounded-lg border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    </div>
+                </div>
+
+                <!-- Coluna Direita -->
+                <div class="space-y-4">
+                    <div>
+                        <label for="Population" class="block text-sm font-medium text-gray-300 mb-1">População do Distrito</label>
+                        <input type="number" step="any" name="Population" required value="322.0" class="w-full p-3 bg-gray-700 text-white rounded-lg border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    </div>
+                    <div>
+                        <label for="AveOccup" class="block text-sm font-medium text-gray-300 mb-1">Ocupação Média</label>
+                        <input type="number" step="any" name="AveOccup" required value="2.5555" class="w-full p-3 bg-gray-700 text-white rounded-lg border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    </div>
+                    <div>
+                        <label for="Latitude" class="block text-sm font-medium text-gray-300 mb-1">Latitude</label>
+                        <input type="number" step="any" name="Latitude" required value="37.88" class="w-full p-3 bg-gray-700 text-white rounded-lg border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    </div>
+                    <div>
+                        <label for="Longitude" class="block text-sm font-medium text-gray-300 mb-1">Longitude</label>
+                        <input type="number" step="any" name="Longitude" required value="-122.23" class="w-full p-3 bg-gray-700 text-white rounded-lg border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    </div>
+                </div>
             </div>
-            <div class="form-group">
-                <label for="HouseAge">Idade Média da Casa (HouseAge):</label>
-                <input type="number" step="any" name="HouseAge" required value="41.0">
+
+            <div>
+                <button type="submit" class="w-full py-3 px-4 bg-blue-600 hover:bg-blue-700 rounded-lg text-white font-bold text-lg transition-colors">Estimar Valor</button>
             </div>
-            <div class="form-group">
-                <label for="AveRooms">Média de Quartos (AveRooms):</label>
-                <input type="number" step="any" name="AveRooms" required value="6.9841">
-            </div>
-            <div class="form-group">
-                <label for="AveBedrms">Média de Dormitórios (AveBedrms):</label>
-                <input type="number" step="any" name="AveBedrms" required value="1.0238">
-            </div>
-            <div class="form-group">
-                <label for="Population">População do Distrito (Population):</label>
-                <input type="number" step="any" name="Population" required value="322.0">
-            </div>
-            <div class="form-group">
-                <label for="AveOccup">Ocupação Média (AveOccup):</label>
-                <input type="number" step="any" name="AveOccup" required value="2.5555">
-            </div>
-            <div class="form-group">
-                <label for="Latitude">Latitude:</label>
-                <input type="number" step="any" name="Latitude" required value="37.88">
-            </div>
-            <div class="form-group">
-                <label for="Longitude">Longitude:</label>
-                <input type="number" step="any" name="Longitude" required value="-122.23">
-            </div>
-            <button type="submit">Estimar Valor</button>
         </form>
 
         {% if prediction %}
-        <div class="result">
-            <h2>Valor Estimado do Imóvel:</h2>
-            <p>${{ prediction }}</p>
+        <div class="mt-8 p-6 bg-gray-900 rounded-lg text-center">
+            <h2 class="text-xl font-medium text-gray-300">Valor Estimado do Imóvel:</h2>
+            <p class="text-4xl font-bold text-green-400 mt-2">$ {{ prediction }}</p>
         </div>
         {% endif %}
+
+        <!-- Seção Sobre o Modelo -->
+        <div class="mt-8 text-center">
+            <button id="toggle-button" class="text-blue-400 hover:text-blue-300">Saiba mais sobre o modelo</button>
+        </div>
+
+        <div id="model-info" class="hidden mt-6 p-6 bg-gray-900/50 rounded-lg border border-gray-700">
+            <h3 class="text-2xl font-bold text-white mb-4">Sobre o Modelo de Regressão</h3>
+            <p class="text-gray-300">
+                Este projeto utiliza um modelo de <strong>Regressão de Floresta Aleatória (RandomForestRegressor)</strong> para prever o valor de imóveis. Uma Floresta Aleatória é um método de aprendizado de máquina que opera construindo uma infinidade de árvores de decisão durante o treinamento e emitindo a classe que é o modo das classes (classificação) ou a previsão média (regressão) das árvores individuais.
+            </p>
+            <p class="text-gray-300 mt-4">
+                O modelo foi treinado no conjunto de dados de habitação da Califórnia, que inclui características como renda média, idade da casa e localização. A acurácia do modelo é medida pelo R², que neste caso é de <strong>81%</strong>, indicando que o modelo consegue explicar 81% da variância nos preços dos imóveis.
+            </p>
+            <div class="mt-6">
+                <h4 class="text-xl font-bold text-white mb-2">Detalhes Técnicos:</h4>
+                <ul class="list-disc list-inside text-gray-300 space-y-1">
+                    <li><strong>Bibliotecas:</strong> Scikit-learn, Pandas, NumPy, Flask</li>
+                    <li><strong>Dataset:</strong> California Housing, da biblioteca Scikit-learn</li>
+                </ul>
+            </div>
+            <div class="mt-6 text-center text-gray-400">
+                <p>Desenvolvido por: Bruno Winicius Amorim</p>
+            </div>
+        </div>
+
     </div>
+
+    <script>
+        const toggleButton = document.getElementById('toggle-button');
+        const modelInfo = document.getElementById('model-info');
+
+        toggleButton.addEventListener('click', () => {
+            modelInfo.classList.toggle('hidden');
+        });
+    </script>
+
 </body>
 </html>
